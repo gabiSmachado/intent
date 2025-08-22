@@ -1,23 +1,25 @@
 import httpx, yaml, sys, os
 from fastmcp import FastMCP
-
-PARENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if PARENT_DIR not in sys.path:
-    sys.path.append(PARENT_DIR)
-
 from utils.logger import get_logger
+
 logger = get_logger("mcp-server", log_file="mcp_server.log", level=20, console_level=20)
 
 # Create an HTTP client for the target API
 client = httpx.AsyncClient(base_url="http://127.0.0.1:9100")
 
-CONFIG_FILE_PATH = '../config.yaml'
+CONFIG_FILE_PATH = 'config/config.yaml'
 OPENAPI_SPEC_FILE = 'NetworkSliceBooking.yaml'
 
 if __name__ == "__main__":    
     try:
         with open(CONFIG_FILE_PATH, 'r') as f:
-                config = yaml.safe_load(f)
+            raw_cfg = yaml.safe_load(f) or {}
+            # Accept either flat host/port or nested under mcp_server
+            section = raw_cfg.get('mcp_server', raw_cfg)
+            config = {
+                'host': os.getenv('MCP_HOST', section.get('host', '0.0.0.0')),
+                'port': int(os.getenv('MCP_PORT', section.get('port', 8000)))
+            }
     except FileNotFoundError:
         print(f"Configuration file not found: {CONFIG_FILE_PATH}")
         sys.exit(1)

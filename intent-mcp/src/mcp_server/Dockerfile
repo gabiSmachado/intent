@@ -1,15 +1,29 @@
-# Use official Python image
-FROM python:3.11-slim
+###############################
+# MCP Server Dockerfile
+# Build from repository root: (inside intent-mcp/src)
+#   docker build -f mcp_server/Dockerfile -t mcp_server .
+###############################
 
-# Set working directory
+FROM python:3.11-slim AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+	PYTHONUNBUFFERED=1 \
+	PIP_NO_CACHE_DIR=1
+
 WORKDIR /app
 
-# Copy requirements if exists, else skip
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+# Install dependencies first (better layer caching)
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy server.py and other source files
-COPY server.py ./
+# Copy server code & supporting assets
+COPY mcp_server/server.py ./
+COPY mcp_server/NetworkSliceBooking.yaml ./
+COPY mcp_server/config ./config
+COPY mcp_server/utils ./utils
 
-# Run the server
+# Expose default port (must match config/config.yaml)
+EXPOSE 8000
+
+# Default command
 CMD ["python", "server.py"]
