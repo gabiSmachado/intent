@@ -469,3 +469,15 @@
 2025-08-21 21:11:31,172 - mcp-client - INFO - Successfully connected to server. Available tools: ['createSession', 'getSession', 'deleteSession']
 2025-08-21 21:12:31,682 - mcp-client - INFO - Processing intent: My slice use case is eMBB for an Airport lounge 4-K pipe, and it is crucial to maximize throughput. Push for the highest throughput, to maximize QoS/QoE of our users, with min 60 Mbps and min 10 ms.
 2025-08-21 21:12:35,809 - mcp-client - INFO - Shuting down MCP connection.
+2025-08-21 21:57:05,996 - mcp-client - INFO - Attempting to connect to server.
+2025-08-21 21:57:06,054 - mcp-client - INFO - Shuting down MCP connection.
+2025-08-21 21:57:06,055 - mcp-client - ERROR - Error during cleanup: unhandled errors in a TaskGroup (1 sub-exception)
+2025-08-21 21:58:50,544 - mcp-client - INFO - Attempting to connect to server at http://mcp-server.smo:8000/mcp.
+2025-08-21 21:58:50,654 - mcp-client - INFO - Requesting MCP tools from the server.
+2025-08-21 21:58:50,680 - mcp-client - INFO - Successfully connected to server. Available tools: ['createSession', 'getSession', 'deleteSession']
+2025-08-21 21:58:50,680 - mcp-client - INFO - Shuting down MCP connection.
+2025-08-21 22:00:04,342 - mcp-client - INFO - Attempting to connect to server at http://mcp-server.smo:8000/mcp.
+2025-08-21 22:00:04,416 - mcp-client - INFO - Requesting MCP tools from the server.
+2025-08-21 22:00:04,437 - mcp-client - INFO - Successfully connected to server. Available tools: ['createSession', 'getSession', 'deleteSession']
+2025-08-21 22:00:04,437 - mcp-client - INFO - Processing intent: My slice use case is eMBB for an Airport lounge 4-K pipe, and it is crucial to maximize throughput. Push for the highest throughput, to maximize QoS/QoE of our users, with min 60 Mbps and min 10 ms.
+2025-08-21 22:00:07,556 - mcp-client - INFO - Shuting down MCP connection.
