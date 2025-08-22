@@ -5,13 +5,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
-
-
-PARENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if PARENT_DIR not in sys.path:
-    sys.path.append(PARENT_DIR)
-
 from utils.logger import get_logger
+
 logger = get_logger("mcp-client", log_file="mcp_client.log", level=20, console_level=20)
 
 load_dotenv()
@@ -19,7 +14,7 @@ api_key = os.getenv("OPENAI_API_KEY", "")
 if not api_key:
     logger.warning("OPENAI_API_KEY não definida. Defina antes de chamar o LLM.")
 
-CONFIG_FILE_PATH = '../config.yaml'
+CONFIG_FILE_PATH = 'config/config.yaml'
 
 class MCPClient:
     def __init__(self, api_key: str):
